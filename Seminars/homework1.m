@@ -4,7 +4,7 @@ clear all;clc;
 %%%%%%%%%
 m=[2; -3; 4];
 Co = [1 1 1; 1 3 2; 1 2 2];
-alpha = 0.1;
+alpha = 0.05;
 %%%%%%%%%
 
 p=length(m);
@@ -83,3 +83,38 @@ half_length=sqrt(L*C_squared/n);
 %full length along eigenvector ei
 full_length=2*half_length;
 
+%% c)
+%%%%%%%%%
+mu=[8 17 31];
+alpha=0.05;
+%%%%%%%%%
+
+C_squared = (n-1)*p/(n-p)*finv(1-alpha,p,n-p);
+Fstatistic=n*((smallData_mean-mu) * inv(smallData_cov) *transpose(smallData_mean-mu))
+if Fstatistic <= C_squared
+    disp('As Fstatistic <= C_squared, mu=mu0 null hypothesis is accepted'); 
+else
+    disp('As Fstatistic >= C_squared mu=mu0 null hypothesis is rejected'); 
+end
+
+%% d-e)
+%individual confidence intervals
+individual_left_interval=transpose(smallData_mean)+tinv(alpha/2,n-1)*sqrt(diag(smallData_cov)/n);
+individual_right_interval=transpose(smallData_mean)-tinv(alpha/2,n-1)*sqrt(diag(smallData_cov)/n);
+individual_intervals=[individual_left_interval individual_right_interval];
+% checking if mu fits in interval
+(transpose(mu)> individual_left_interval) & (transpose(mu) < individual_right_interval)
+
+%symultaneous confidence intervals
+symultaneous_left_interval=transpose(smallData_mean)-sqrt(C_squared*diag(smallData_cov)/n);
+symultaneous_right_interval=transpose(smallData_mean)+sqrt(C_squared*diag(smallData_cov)/n);
+symultaneous_intervals=[symultaneous_left_interval symultaneous_right_interval];
+% checking if mu fits in interval
+(transpose(mu)> symultaneous_left_interval) & (transpose(mu) < symultaneous_right_interval)
+
+%Bonferroni confidence intervals
+Bonferroni_left_interval=transpose(smallData_mean)+tinv(alpha/2/p,n-1)*sqrt(diag(smallData_cov)/n);
+Bonferroni_right_interval=transpose(smallData_mean)-tinv(alpha/2/p,n-1)*sqrt(diag(smallData_cov)/n);
+Bonferroni_intervals=[Bonferroni_left_interval Bonferroni_right_interval];
+% checking if mu fits in interval
+(transpose(mu)> Bonferroni_left_interval) & (transpose(mu) < Bonferroni_right_interval)

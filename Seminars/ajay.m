@@ -63,9 +63,11 @@ if Fstatistic <= Threshold
 disp('As Fstatistic <= Threshold, mu=mu0 null hypothesis is accepted'); else
 disp('As Fstatistic >= Threshold mu=mu0 null hypothesis is rejected'); end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% Part D %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-disp('------------------------------------------------------------------'); fprintf('\nPart D solution\n'); disp('------------------------------------------------------------------'); alpha_d=0.05;
+disp('------------------------------------------------------------------'); 
+fprintf('\nPart D solution\n'); disp('------------------------------------------------------------------'); alpha_d=0.05;
 a=[1;0;0];
-x1i=[a'*X_mean+tinv(alpha_d/2,n-1)*sqrt(a'*X_cov*a)/sqrt(n) a'*X_mean-tinv(alpha_d/2,n-1)*sqrt(a'*X_cov*a)/sqrt(n)]; fprintf('Individual confidence inteval for x1=[%4.2f %4.2f]\n\n',x1i);
+x1i=[a'*X_mean+tinv(alpha_d/2,n-1)*sqrt(a'*X_cov*a)/sqrt(n) a'*X_mean-tinv(alpha_d/2,n-1)*sqrt(a'*X_cov*a)/sqrt(n)]; 
+fprintf('Individual confidence inteval for x1=[%4.2f %4.2f]\n\n',x1i);
 a=[0;1;0];
 x2i=[a'*X_mean+tinv(alpha_d/2,n-1)*sqrt(a'*X_cov*a)/sqrt(n) a'*X_mean-tinv(alpha_d/2,n-1)*sqrt(a'*X_cov*a)/sqrt(n)]; fprintf('Individual confidence inteval for x2=[%4.2f %4.2f]\n\n',x2i);
 a=[0;0;1];
