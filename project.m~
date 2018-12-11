@@ -86,6 +86,9 @@ Raman_remainder=Raman_score(:,dof+1:end)
 %y2 is valid while 
 Chi=chi2inv(1-alpha1,dof);
 
+biplot(mat_coeff,'scores',mat_score);
+biplot(mat_coeff,'scores',mat_score);
+
 %% NIR PCA Plot
 NIR_xi=linspace(-sqrt(Chi*NIR_latent(1)),sqrt(Chi*NIR_latent(1)));
 NIR_yp =sqrt(NIR_latent(2)*(Chi-(NIR_xi.^2./NIR_latent(1))));
